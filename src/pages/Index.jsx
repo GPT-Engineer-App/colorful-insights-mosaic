@@ -157,17 +157,17 @@ const MariusInteractiveDashboard = () => {
       case 'timeline':
         return (
           <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''}`}>
-            <h2 className="text-2xl font-semibold mb-4 flex items-center">
+            <h2 className="text-2xl font-semibold mb-6 flex items-center">
               <Clock className="mr-2" /> Career Timeline
             </h2>
-            <div className="relative pl-24">
-              <div className={`absolute left-20 top-0 bottom-0 w-0.5 ${isDarkMode ? 'bg-purple-300' : 'bg-purple-600'}`}></div>
+            <div className="space-y-8">
               {timelineData.map((item, index) => (
-                <div key={index} className="mb-6 flex items-start relative">
-                  <div className={`absolute left-0 w-16 font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>
+                <div key={index} className="flex items-center space-x-4">
+                  <div className={`flex-shrink-0 w-20 text-right font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>
                     {item.date}
                   </div>
-                  <div className={`flex-1 p-2 rounded ${isDarkMode ? 'bg-gray-700' : 'bg-purple-100'}`}>
+                  <div className={`w-3 h-3 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-500'}`}></div>
+                  <div className={`flex-grow p-3 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-purple-50'}`}>
                     {item.event}
                   </div>
                 </div>
