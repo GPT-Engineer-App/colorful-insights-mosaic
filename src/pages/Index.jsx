@@ -229,60 +229,73 @@ const MariusInteractiveDashboard = () => {
         </button>
       </div>
       
-      <div className={`p-4 rounded-lg mb-6 transition-all duration-300 ${isProfileExpanded ? 'h-auto' : 'h-24 overflow-hidden'} ${isDarkMode ? 'bg-gray-700' : 'bg-blue-100'}`}>
+      <div className={`p-6 rounded-lg mb-6 transition-all duration-300 ${isProfileExpanded ? 'h-auto' : 'h-48 overflow-hidden'} ${
+        isDarkMode 
+          ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
+          : 'bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100'
+      }`}>
         <div className="flex justify-between items-start">
-          <div>
-            <h2 className="text-xl font-semibold mb-2 flex items-center">
-              <User className="mr-2" /> Profile Snapshot
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="flex items-center">
-                <Briefcase className="w-4 h-4 mr-2" />
-                <p>Software Engineer & Co-Founder at Veloxforce</p>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
+          <div className="flex items-start space-x-4">
+            <img 
+              src="https://ik.imagekit.io/libralab/AAA/Avatars/marius-wilsch" 
+              alt="Marius Wilsch" 
+              className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+            />
+            <div>
+              <h2 className="text-2xl font-bold mb-2">Marius Wilsch</h2>
+              <p className="text-lg mb-2">Software Engineer & Co-Founder at Veloxforce</p>
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-4 h-4" />
                 <p>Munich, Germany</p>
-              </div>
-              <div className="flex items-center">
-                <Mail className="w-4 h-4 mr-2" />
-                <a href="mailto:m.wilsch@veloxforce.com" className="text-blue-500 hover:underline">m.wilsch@veloxforce.com</a>
-              </div>
-              <div className="flex items-center">
-                <Linkedin className="w-4 h-4 mr-2" />
-                <a href="https://www.linkedin.com/in/marius-wilsch/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">LinkedIn Profile</a>
               </div>
             </div>
           </div>
           <button 
             onClick={() => setIsProfileExpanded(!isProfileExpanded)}
-            className={`px-2 py-1 rounded ${isDarkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-blue-500 text-white hover:bg-blue-600'} transition-colors`}
+            className={`px-3 py-1 rounded-full ${
+              isDarkMode 
+                ? 'bg-purple-500 text-white hover:bg-purple-600' 
+                : 'bg-purple-600 text-white hover:bg-purple-700'
+            } transition-colors`}
           >
             {isProfileExpanded ? 'Show Less' : 'Show More'}
           </button>
         </div>
-        {isProfileExpanded && (
-          <div className="mt-4 animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="flex items-center">
-                <Briefcase className="w-4 h-4 mr-2" />
-                <p><strong>Experience:</strong> 5+ years in software development</p>
-              </div>
-              <div className="flex items-center">
-                <GraduationCap className="w-4 h-4 mr-2" />
-                <p><strong>Education:</strong> Computer Software Engineering, Codam College</p>
-              </div>
-              <div className="flex items-center">
-                <Globe className="w-4 h-4 mr-2" />
-                <p><strong>Languages:</strong> German (native), English (fluent)</p>
-              </div>
-              <div className="flex items-center">
-                <Star className="w-4 h-4 mr-2" />
-                <p><strong>Interests:</strong> AI development, business development, programming</p>
-              </div>
+        <div className={`mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 ${isProfileExpanded ? 'animate-fade-in' : 'hidden'}`}>
+          <div className={`p-3 rounded-lg ${
+            isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
+          }`}>
+            <h3 className="font-semibold mb-2">Contact</h3>
+            <div className="flex items-center space-x-2 mb-1">
+              <Mail className="w-4 h-4" />
+              <a href="mailto:m.wilsch@veloxforce.com" className="text-blue-500 hover:underline">m.wilsch@veloxforce.com</a>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Linkedin className="w-4 h-4" />
+              <a href="https://www.linkedin.com/in/marius-wilsch/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">LinkedIn Profile</a>
             </div>
           </div>
-        )}
+          <div className={`p-3 rounded-lg ${
+            isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
+          }`}>
+            <h3 className="font-semibold mb-2">Background</h3>
+            <p><strong>Experience:</strong> 5+ years in software development</p>
+            <p><strong>Education:</strong> Computer Software Engineering, Codam College</p>
+          </div>
+          <div className={`p-3 rounded-lg ${
+            isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
+          }`}>
+            <h3 className="font-semibold mb-2">Skills</h3>
+            <p><strong>Languages:</strong> German (native), English (fluent)</p>
+            <p><strong>Expertise:</strong> AI development, Software Engineering, Project Management</p>
+          </div>
+          <div className={`p-3 rounded-lg ${
+            isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
+          }`}>
+            <h3 className="font-semibold mb-2">Interests</h3>
+            <p>AI development, business development, programming</p>
+          </div>
+        </div>
       </div>
       
       <div className="flex justify-center space-x-4 mb-6">
