@@ -57,7 +57,11 @@ const MariusInteractiveDashboard = () => {
     switch(activeSection) {
       case 'skills':
         return (
-          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''}`}>
+          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''} p-6 rounded-lg ${
+            isDarkMode 
+              ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
+              : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
+          }`}>
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <Code className="mr-2" /> Skills Breakdown
             </h2>
@@ -66,18 +70,30 @@ const MariusInteractiveDashboard = () => {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="value" fill={isDarkMode ? "#8884d8" : "#82ca9d"}>
+                <Bar dataKey="value">
                   {skillData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={`url(#colorGradient${index})`} />
                   ))}
                 </Bar>
+                <defs>
+                  {COLORS.map((color, index) => (
+                    <linearGradient key={`gradient${index}`} id={`colorGradient${index}`} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor={color} stopOpacity={0.3}/>
+                    </linearGradient>
+                  ))}
+                </defs>
               </BarChart>
             </ResponsiveContainer>
             <div className="mt-4">
               <h3 className="text-xl font-semibold mb-2">Additional Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {["Requirements Analysis", "Systems Engineering", "SQL", "Node.js", "C++", "Product Development"].map((skill, index) => (
-                  <span key={index} className={`px-2 py-1 rounded-full text-sm ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200'}`}>
+                  <span key={index} className={`px-2 py-1 rounded-full text-sm ${
+                    isDarkMode 
+                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white' 
+                      : 'bg-gradient-to-r from-purple-200 to-blue-200'
+                  }`}>
                     {skill}
                   </span>
                 ))}
@@ -87,7 +103,11 @@ const MariusInteractiveDashboard = () => {
         );
       case 'projects':
         return (
-          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''}`}>
+          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''} p-6 rounded-lg ${
+            isDarkMode 
+              ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
+              : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
+          }`}>
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <Puzzle className="mr-2" /> Project Distribution
             </h2>
@@ -105,23 +125,37 @@ const MariusInteractiveDashboard = () => {
                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                   >
                     {projectData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      <Cell key={`cell-${index}`} fill={`url(#colorGradient${index})`} />
                     ))}
                   </Pie>
                   <Tooltip />
+                  <defs>
+                    {COLORS.map((color, index) => (
+                      <linearGradient key={`gradient${index}`} id={`colorGradient${index}`} x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor={color} stopOpacity={0.3}/>
+                      </linearGradient>
+                    ))}
+                  </defs>
                 </PieChart>
               </ResponsiveContainer>
-              <div>
+              <div className={`p-4 rounded-lg ${
+                isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
+              }`}>
                 <h3 className="text-xl font-semibold mb-2">Key Projects</h3>
-                <ul className="list-disc list-inside">
+                <ul className="list-disc list-inside mb-4">
                   <li>AI-powered automation solutions</li>
                   <li>On-premise AI system for lawyers</li>
                   <li>Community-focused AI tools</li>
                 </ul>
-                <h3 className="text-xl font-semibold mt-4 mb-2">Technologies Used</h3>
+                <h3 className="text-xl font-semibold mb-2">Technologies Used</h3>
                 <div className="flex flex-wrap gap-2">
                   {['LLMs', 'AI Chatbots', 'Automation tools', 'Python', 'Cloud technologies', 'Natural Language Processing'].map((tech, index) => (
-                    <span key={index} className={`px-2 py-1 rounded-full text-sm ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-gray-200'}`}>
+                    <span key={index} className={`px-2 py-1 rounded-full text-sm ${
+                      isDarkMode 
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white' 
+                        : 'bg-gradient-to-r from-purple-200 to-blue-200'
+                    }`}>
                       {tech}
                     </span>
                   ))}
@@ -132,7 +166,11 @@ const MariusInteractiveDashboard = () => {
         );
       case 'growth':
         return (
-          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''}`}>
+          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''} p-6 rounded-lg ${
+            isDarkMode 
+              ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
+              : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
+          }`}>
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <TrendingUp className="mr-2" /> Client Growth
             </h2>
@@ -141,10 +179,18 @@ const MariusInteractiveDashboard = () => {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="clients" stroke={isDarkMode ? "#82ca9d" : "#8884d8"} strokeWidth={2} />
+                <defs>
+                  <linearGradient id="colorClients" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0.3}/>
+                  </linearGradient>
+                </defs>
+                <Line type="monotone" dataKey="clients" stroke="url(#colorClients)" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
-            <div className="mt-4">
+            <div className={`mt-4 p-4 rounded-lg ${
+              isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
+            }`}>
               <h3 className="text-xl font-semibold mb-2">Growth Highlights</h3>
               <ul className="list-disc list-inside">
                 <li>Expanded client base to 20+ companies</li>
@@ -316,17 +362,23 @@ const MariusInteractiveDashboard = () => {
       
       {renderSection()}
       
-      <div className="mt-8 text-center">
-        <h2 className="text-xl font-semibold mb-2 flex items-center justify-center">
+      <div className={`mt-8 text-center p-6 rounded-lg ${
+        isDarkMode 
+          ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
+          : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
+      }`}>
+        <h2 className="text-xl font-semibold mb-4 flex items-center justify-center">
           <Users className="mr-2" /> AAA Community Engagement
         </h2>
-        <div className={`bg-green-200 rounded-full h-4 w-full max-w-md mx-auto ${isDarkMode ? 'bg-green-800' : ''}`}>
+        <div className={`bg-opacity-30 rounded-full h-6 w-full max-w-md mx-auto ${isDarkMode ? 'bg-green-800' : 'bg-green-200'}`}>
           <div 
-            className="bg-green-500 rounded-full h-full transition-all duration-1000" 
+            className="bg-gradient-to-r from-green-400 to-blue-500 rounded-full h-full transition-all duration-1000 flex items-center justify-end pr-2 text-xs font-bold text-white" 
             style={{width: '75%'}}
-          ></div>
+          >
+            75%
+          </div>
         </div>
-        <p className="mt-2">75% - Active Contributor</p>
+        <p className="mt-2 font-semibold">Active Contributor</p>
       </div>
       
       <div className={`text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} mt-8`}>
