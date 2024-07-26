@@ -57,18 +57,18 @@ const MariusInteractiveDashboard = () => {
     switch(activeSection) {
       case 'skills':
         return (
-          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''} p-6 rounded-lg ${
+          <div className={`animate-fade-in ${isDarkMode ? 'text-white' : ''} p-4 sm:p-6 rounded-lg ${
             isDarkMode 
               ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
               : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
           }`}>
-            <h2 className="text-2xl font-semibold mb-4 flex items-center">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 flex items-center">
               <Code className="mr-2" /> Skills Breakdown
             </h2>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={skillData}>
-                <XAxis dataKey="name" />
-                <YAxis />
+              <BarChart data={skillData} layout="vertical">
+                <XAxis type="number" />
+                <YAxis dataKey="name" type="category" width={100} />
                 <Tooltip />
                 <Bar dataKey="value">
                   {skillData.map((entry, index) => (
@@ -77,7 +77,7 @@ const MariusInteractiveDashboard = () => {
                 </Bar>
                 <defs>
                   {COLORS.map((color, index) => (
-                    <linearGradient key={`gradient${index}`} id={`colorGradient${index}`} x1="0" y1="0" x2="0" y2="1">
+                    <linearGradient key={`gradient${index}`} id={`colorGradient${index}`} x1="0" y1="0" x2="1" y2="0">
                       <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
                       <stop offset="95%" stopColor={color} stopOpacity={0.3}/>
                     </linearGradient>
@@ -86,10 +86,10 @@ const MariusInteractiveDashboard = () => {
               </BarChart>
             </ResponsiveContainer>
             <div className="mt-4">
-              <h3 className="text-xl font-semibold mb-2">Additional Skills</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Additional Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {["Requirements Analysis", "Systems Engineering", "SQL", "Node.js", "C++", "Product Development"].map((skill, index) => (
-                  <span key={index} className={`px-2 py-1 rounded-full text-sm ${
+                  <span key={index} className={`px-2 py-1 rounded-full text-xs sm:text-sm ${
                     isDarkMode 
                       ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white' 
                       : 'bg-gradient-to-r from-purple-200 to-blue-200'
@@ -264,9 +264,9 @@ const MariusInteractiveDashboard = () => {
   };
 
   return (
-    <div className={`p-6 rounded-lg shadow-lg max-w-4xl mx-auto ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white'}`}>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className={`text-3xl font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>Marius Wilsch - Professional Dashboard</h1>
+    <div className={`p-4 sm:p-6 rounded-lg shadow-lg max-w-4xl mx-auto ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white'}`}>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
+        <h1 className={`text-2xl sm:text-3xl font-bold mb-4 sm:mb-0 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>Marius Wilsch - Dashboard</h1>
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           className={`p-2 rounded-full ${isDarkMode ? 'bg-yellow-400 text-gray-800' : 'bg-gray-800 text-yellow-400'}`}
@@ -275,22 +275,22 @@ const MariusInteractiveDashboard = () => {
         </button>
       </div>
       
-      <div className={`p-6 rounded-lg mb-6 transition-all duration-300 ${isProfileExpanded ? 'h-auto' : 'h-48 overflow-hidden'} ${
+      <div className={`p-4 sm:p-6 rounded-lg mb-6 transition-all duration-300 ${isProfileExpanded ? 'h-auto' : 'h-auto sm:h-48 overflow-hidden'} ${
         isDarkMode 
           ? 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900' 
           : 'bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100'
       }`}>
-        <div className="flex justify-between items-start">
-          <div className="flex items-start space-x-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-0">
             <img 
               src="https://ik.imagekit.io/libralab/AAA/Avatars/marius-wilsch" 
               alt="Marius Wilsch" 
               className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
             />
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Marius Wilsch</h2>
-              <p className="text-lg mb-2">Software Engineer & Co-Founder at Veloxforce</p>
-              <div className="flex items-center space-x-2">
+            <div className="text-center sm:text-left">
+              <h2 className="text-xl sm:text-2xl font-bold mb-2">Marius Wilsch</h2>
+              <p className="text-base sm:text-lg mb-2">Software Engineer & Co-Founder at Veloxforce</p>
+              <div className="flex items-center justify-center sm:justify-start space-x-2">
                 <MapPin className="w-4 h-4" />
                 <p>Munich, Germany</p>
               </div>
@@ -298,7 +298,7 @@ const MariusInteractiveDashboard = () => {
           </div>
           <button 
             onClick={() => setIsProfileExpanded(!isProfileExpanded)}
-            className={`px-3 py-1 rounded-full ${
+            className={`px-3 py-1 rounded-full mt-4 sm:mt-0 ${
               isDarkMode 
                 ? 'bg-purple-500 text-white hover:bg-purple-600' 
                 : 'bg-purple-600 text-white hover:bg-purple-700'
@@ -307,7 +307,7 @@ const MariusInteractiveDashboard = () => {
             {isProfileExpanded ? 'Show Less' : 'Show More'}
           </button>
         </div>
-        <div className={`mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 ${isProfileExpanded ? 'animate-fade-in' : 'hidden'}`}>
+        <div className={`mt-4 grid grid-cols-1 gap-4 ${isProfileExpanded ? 'animate-fade-in' : 'hidden'}`}>
           <div className={`p-3 rounded-lg ${
             isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-50'
           }`}>
@@ -344,12 +344,12 @@ const MariusInteractiveDashboard = () => {
         </div>
       </div>
       
-      <div className="flex justify-center space-x-4 mb-6">
+      <div className="flex flex-wrap justify-center gap-2 mb-6">
         {['overview', 'skills', 'projects', 'growth', 'timeline'].map((section) => (
           <button 
             key={section}
             onClick={() => setActiveSection(section)}
-            className={`px-4 py-2 rounded ${
+            className={`px-3 py-1 text-sm sm:text-base rounded ${
               activeSection === section
                 ? isDarkMode ? 'bg-purple-500 text-white' : 'bg-purple-600 text-white'
                 : isDarkMode ? 'bg-gray-600 text-white' : 'bg-gray-200'
