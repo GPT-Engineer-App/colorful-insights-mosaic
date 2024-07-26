@@ -161,20 +161,20 @@ const MariusInteractiveDashboard = () => {
               <Clock className="mr-2" /> Career Timeline
             </h2>
             <div className="relative pl-6">
+              <div className={`absolute left-3 top-0 bottom-0 w-0.5 ${isDarkMode ? 'bg-purple-300' : 'bg-purple-600'}`}></div>
               {timelineData.map((item, index) => (
-                <div key={index} className="mb-4 flex items-start">
-                  <div className={`absolute left-0 w-6 h-6 rounded-full ${isDarkMode ? 'bg-purple-500' : 'bg-purple-600'} flex items-center justify-center text-white text-xs font-bold`}>
+                <div key={index} className="mb-8 flex items-start relative">
+                  <div className={`absolute left-0 w-6 h-6 rounded-full ${isDarkMode ? 'bg-purple-500' : 'bg-purple-600'} flex items-center justify-center text-white text-xs font-bold z-10`}>
                     {index + 1}
                   </div>
-                  <div className="ml-8">
+                  <div className="ml-10">
                     <div className={`font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>{item.date}</div>
-                    <div className={`p-2 rounded ${isDarkMode ? 'bg-gray-700' : 'bg-purple-100'}`}>
+                    <div className={`p-2 rounded ${isDarkMode ? 'bg-gray-700' : 'bg-purple-100'} mt-1`}>
                       {item.event}
                     </div>
                   </div>
                 </div>
               ))}
-              <div className={`absolute left-3 top-3 bottom-0 w-0.5 ${isDarkMode ? 'bg-purple-300' : 'bg-purple-600'}`}></div>
             </div>
           </div>
         );
