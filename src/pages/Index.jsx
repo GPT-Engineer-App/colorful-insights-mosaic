@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { User, Code, Target, Puzzle, Star, TrendingUp, Users, Calendar, Sun, Moon, Clock } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { User, Code, Target, Puzzle, Star, TrendingUp, Users, Calendar, Sun, Moon, Clock, Briefcase, GraduationCap, Globe, Mail, Linkedin, MapPin } from 'lucide-react';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
 
 const skillData = [
-  { name: 'AI', value: 90 },
-  { name: 'Software Dev', value: 85 },
-  { name: 'Project Mgmt', value: 70 },
+  { name: 'AI & ML', value: 95 },
+  { name: 'Software Dev', value: 90 },
+  { name: 'Project Mgmt', value: 85 },
   { name: 'Business Dev', value: 65 },
-  { name: 'Communication', value: 80 },
+  { name: 'Communication', value: 87 },
+  { name: 'Problem Solving', value: 93 },
 ];
 
 const projectData = [
@@ -38,6 +39,15 @@ const timelineData = [
   { date: '2024', event: 'Expanded client base to 20+ companies' },
 ];
 
+const projectMetrics = [
+  { subject: 'Efficiency', A: 120, B: 110, fullMark: 150 },
+  { subject: 'Scalability', A: 98, B: 75, fullMark: 150 },
+  { subject: 'Cost Savings', A: 86, B: 90, fullMark: 150 },
+  { subject: 'Accuracy', A: 99, B: 115, fullMark: 150 },
+  { subject: 'User Satisfaction', A: 85, B: 95, fullMark: 150 },
+  { subject: 'Implementation Speed', A: 65, B: 80, fullMark: 150 },
+];
+
 const MariusInteractiveDashboard = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('overview');
@@ -63,6 +73,16 @@ const MariusInteractiveDashboard = () => {
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
+            <div className="mt-4">
+              <h3 className="text-xl font-semibold mb-2">Additional Skills</h3>
+              <div className="flex flex-wrap gap-2">
+                {["Requirements Analysis", "Systems Engineering", "SQL", "Node.js", "C++", "Product Development"].map((skill, index) => (
+                  <span key={index} className={`px-2 py-1 rounded-full text-sm ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200'}`}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         );
       case 'projects':
@@ -71,25 +91,46 @@ const MariusInteractiveDashboard = () => {
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <Puzzle className="mr-2" /> Project Distribution
             </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={projectData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                >
-                  {projectData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={projectData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  >
+                    {projectData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={300}>
+                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={projectMetrics}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="subject" />
+                  <PolarRadiusAxis angle={30} domain={[0, 150]} />
+                  <Radar name="AI Automation" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                  <Radar name="On-premise AI" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+                  <Legend />
+                  <Tooltip />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4">
+              <h3 className="text-xl font-semibold mb-2">Key Projects</h3>
+              <ul className="list-disc list-inside">
+                <li>AI-powered automation solutions</li>
+                <li>On-premise AI system for lawyers</li>
+                <li>Community-focused AI tools</li>
+              </ul>
+            </div>
           </div>
         );
       case 'growth':
@@ -106,6 +147,14 @@ const MariusInteractiveDashboard = () => {
                 <Line type="monotone" dataKey="clients" stroke={isDarkMode ? "#82ca9d" : "#8884d8"} strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
+            <div className="mt-4">
+              <h3 className="text-xl font-semibold mb-2">Growth Highlights</h3>
+              <ul className="list-disc list-inside">
+                <li>Expanded client base to 20+ companies</li>
+                <li>Launched first AI product in 2023</li>
+                <li>Consistent month-over-month growth</li>
+              </ul>
+            </div>
           </div>
         );
       case 'timeline':
@@ -114,16 +163,21 @@ const MariusInteractiveDashboard = () => {
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <Clock className="mr-2" /> Career Timeline
             </h2>
-            <div className="relative">
+            <div className="relative pl-8">
               {timelineData.map((item, index) => (
                 <div key={index} className="mb-4 flex items-start">
-                  <div className={`w-24 font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>{item.date}</div>
-                  <div className={`flex-1 ml-4 p-2 rounded ${isDarkMode ? 'bg-gray-700' : 'bg-purple-100'}`}>
-                    {item.event}
+                  <div className={`absolute left-0 w-6 h-6 rounded-full ${isDarkMode ? 'bg-purple-500' : 'bg-purple-600'} flex items-center justify-center text-white text-xs font-bold`}>
+                    {index + 1}
+                  </div>
+                  <div className={`ml-6`}>
+                    <div className={`font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>{item.date}</div>
+                    <div className={`p-2 rounded ${isDarkMode ? 'bg-gray-700' : 'bg-purple-100'}`}>
+                      {item.event}
+                    </div>
                   </div>
                 </div>
               ))}
-              <div className={`absolute left-[23px] top-0 bottom-0 w-0.5 ${isDarkMode ? 'bg-purple-300' : 'bg-purple-600'}`}></div>
+              <div className={`absolute left-3 top-3 bottom-0 w-0.5 ${isDarkMode ? 'bg-purple-300' : 'bg-purple-600'}`}></div>
             </div>
           </div>
         );
@@ -138,6 +192,7 @@ const MariusInteractiveDashboard = () => {
                 <li>Transition to project management</li>
                 <li>Build partnerships with sales professionals</li>
                 <li>Develop AI-driven retention strategies</li>
+                <li>Focus on project management and coding</li>
               </ul>
             </div>
             <div className={`p-4 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-yellow-100'}`}>
@@ -145,11 +200,22 @@ const MariusInteractiveDashboard = () => {
                 <Star className="mr-2" /> AI Technologies
               </h2>
               <div className="flex flex-wrap gap-2">
-                {['LLMs', 'AI Chatbots', 'Automation tools', 'Python', 'Cloud technologies'].map((tech, index) => (
+                {['LLMs', 'AI Chatbots', 'Automation tools', 'Python', 'Cloud technologies', 'Natural Language Processing'].map((tech, index) => (
                   <span key={index} className={`px-2 py-1 rounded-full text-sm ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-white'}`}>
                     {tech}
                   </span>
                 ))}
+              </div>
+            </div>
+            <div className={`p-4 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-green-100'} md:col-span-2`}>
+              <h2 className="text-xl font-semibold mb-2 flex items-center">
+                <Briefcase className="mr-2" /> Company Overview
+              </h2>
+              <p><strong>Veloxforce:</strong> We help businesses remove their pressing pain points by installing an `AI-workforce` that works 24/7</p>
+              <div className="mt-2">
+                <p><strong>Team Size:</strong> 2 co-founders, planning to hire developers</p>
+                <p><strong>Funding Status:</strong> Bootstrapped</p>
+                <p><strong>Tech Stack:</strong> Python, AI/ML frameworks, Cloud technologies</p>
               </div>
             </div>
           </div>
@@ -175,9 +241,24 @@ const MariusInteractiveDashboard = () => {
             <h2 className="text-xl font-semibold mb-2 flex items-center">
               <User className="mr-2" /> Profile Snapshot
             </h2>
-            <p><strong>Role:</strong> Software Engineer & Co-Founder at Veloxforce</p>
-            <p><strong>Location:</strong> Munich, Germany</p>
-            <p><strong>Email:</strong> m.wilsch@veloxforce.com</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="flex items-center">
+                <Briefcase className="w-4 h-4 mr-2" />
+                <p>Software Engineer & Co-Founder at Veloxforce</p>
+              </div>
+              <div className="flex items-center">
+                <MapPin className="w-4 h-4 mr-2" />
+                <p>Munich, Germany</p>
+              </div>
+              <div className="flex items-center">
+                <Mail className="w-4 h-4 mr-2" />
+                <a href="mailto:m.wilsch@veloxforce.com" className="text-blue-500 hover:underline">m.wilsch@veloxforce.com</a>
+              </div>
+              <div className="flex items-center">
+                <Linkedin className="w-4 h-4 mr-2" />
+                <a href="https://www.linkedin.com/in/marius-wilsch/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">LinkedIn Profile</a>
+              </div>
+            </div>
           </div>
           <button 
             onClick={() => setIsProfileExpanded(!isProfileExpanded)}
@@ -188,9 +269,24 @@ const MariusInteractiveDashboard = () => {
         </div>
         {isProfileExpanded && (
           <div className="mt-4 animate-fade-in">
-            <p><strong>Experience:</strong> 5+ years in software development</p>
-            <p><strong>Education:</strong> Computer Software Engineering, Codam College</p>
-            <p><strong>Languages:</strong> German (native), English (fluent)</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="flex items-center">
+                <Briefcase className="w-4 h-4 mr-2" />
+                <p><strong>Experience:</strong> 5+ years in software development</p>
+              </div>
+              <div className="flex items-center">
+                <GraduationCap className="w-4 h-4 mr-2" />
+                <p><strong>Education:</strong> Computer Software Engineering, Codam College</p>
+              </div>
+              <div className="flex items-center">
+                <Globe className="w-4 h-4 mr-2" />
+                <p><strong>Languages:</strong> German (native), English (fluent)</p>
+              </div>
+              <div className="flex items-center">
+                <Star className="w-4 h-4 mr-2" />
+                <p><strong>Interests:</strong> AI development, business development, programming</p>
+              </div>
+            </div>
           </div>
         )}
       </div>
