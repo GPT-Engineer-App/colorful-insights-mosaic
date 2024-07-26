@@ -111,25 +111,22 @@ const MariusInteractiveDashboard = () => {
                   <Tooltip />
                 </PieChart>
               </ResponsiveContainer>
-              <ResponsiveContainer width="100%" height={300}>
-                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={projectMetrics}>
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="subject" />
-                  <PolarRadiusAxis angle={30} domain={[0, 150]} />
-                  <Radar name="AI Automation" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                  <Radar name="On-premise AI" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-                  <Legend />
-                  <Tooltip />
-                </RadarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-4">
-              <h3 className="text-xl font-semibold mb-2">Key Projects</h3>
-              <ul className="list-disc list-inside">
-                <li>AI-powered automation solutions</li>
-                <li>On-premise AI system for lawyers</li>
-                <li>Community-focused AI tools</li>
-              </ul>
+              <div>
+                <h3 className="text-xl font-semibold mb-2">Key Projects</h3>
+                <ul className="list-disc list-inside">
+                  <li>AI-powered automation solutions</li>
+                  <li>On-premise AI system for lawyers</li>
+                  <li>Community-focused AI tools</li>
+                </ul>
+                <h3 className="text-xl font-semibold mt-4 mb-2">Technologies Used</h3>
+                <div className="flex flex-wrap gap-2">
+                  {['LLMs', 'AI Chatbots', 'Automation tools', 'Python', 'Cloud technologies', 'Natural Language Processing'].map((tech, index) => (
+                    <span key={index} className={`px-2 py-1 rounded-full text-sm ${isDarkMode ? 'bg-gray-600 text-white' : 'bg-gray-200'}`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -163,13 +160,13 @@ const MariusInteractiveDashboard = () => {
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <Clock className="mr-2" /> Career Timeline
             </h2>
-            <div className="relative pl-8">
+            <div className="relative pl-6">
               {timelineData.map((item, index) => (
                 <div key={index} className="mb-4 flex items-start">
                   <div className={`absolute left-0 w-6 h-6 rounded-full ${isDarkMode ? 'bg-purple-500' : 'bg-purple-600'} flex items-center justify-center text-white text-xs font-bold`}>
                     {index + 1}
                   </div>
-                  <div className={`ml-6`}>
+                  <div className="ml-8">
                     <div className={`font-bold ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>{item.date}</div>
                     <div className={`p-2 rounded ${isDarkMode ? 'bg-gray-700' : 'bg-purple-100'}`}>
                       {item.event}
